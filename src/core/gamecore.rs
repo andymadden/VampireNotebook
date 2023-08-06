@@ -1,18 +1,17 @@
 
-use std::io::{self, Write};
 
-pub enum GameState {
-    TitleScreen,
-    CharacterCreation,
-    GamePlay,
-    Exiting,
-}
+use crate::GameState;
+use std::io::{self, Write};
 
 pub struct GameCore {
     pub state: GameState,
 }
 
 impl GameCore {
+    pub fn new(state: GameState) -> GameCore {
+        GameCore { state }
+    }
+
     pub fn run_game(&self) {
         let stdin = io::stdin();
         let mut stdout = io::stdout();
@@ -29,7 +28,7 @@ impl GameCore {
         }
     }
 
-    fn process_input(&self, input: &String) {
+    fn process_input(&self, input: &str) {
         println!("Processed: {}", input);
     }
 }
