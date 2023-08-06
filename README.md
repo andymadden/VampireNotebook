@@ -1,3 +1,3 @@
 # VampireNotebook
 
-A companion program for Tim Hutchings' "Thousand Year-Old Vampire"
+An unofficial companion program for Tim Hutchings' "Thousand Year-Old Vampire"
