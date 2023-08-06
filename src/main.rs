@@ -1,3 +1,10 @@
+mod core;
+mod models;
+
+use crate::core::{GameCore, GameState};
+
 fn main() {
-    println!("Hello, world!");
+    let game_core = GameCore { state: GameState::TitleScreen };
+
+    game_core.run_game();
 }
