@@ -5,7 +5,8 @@ use gamecore::GameCore;
 use state::TitleState;
 
 fn main() {
-    let game_core = GameCore::new(&TitleState {game_title: "Game Title"});
+    let title_state = TitleState::new("Hey Gamer");
+    let mut game_core = GameCore::new(&title_state);
 
     game_core.run_game();
 }
