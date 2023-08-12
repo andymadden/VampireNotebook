@@ -1,3 +1,7 @@
+mod title_state;
+mod main_menu;
+mod game_play;
+mod pause_menu;
 
 use std::marker::Copy;
 use std::clone::Clone;
@@ -17,22 +21,8 @@ pub enum Transition {
     Next(GameState)
 }
 
-pub fn title_screen_loop(gamecore: &mut GameCore) {
-    println!("Title Screen!");
-    gamecore.set_state(GameState::MainMenu);
-}
+pub use title_state::title_screen_loop;
+pub use main_menu::main_menu_loop;
+pub use game_play::game_play_loop;
+pub use pause_menu::pause_menu_loop;
 
-pub fn main_menu_loop(gamecore: &mut GameCore) {
-    println!("Main Menu!");
-    gamecore.set_state(GameState::GamePlay);
-}
-
-pub fn game_play_loop(gamecore: &mut GameCore) {
-    println!("Game Play!");
-    gamecore.set_state(GameState::PauseMenu);
-}
-
-pub fn pause_menu_loop(gamecore: &mut GameCore) {
-    println!("Pause Menu!");
-    gamecore.set_state(GameState::TitleScreen);
-}
