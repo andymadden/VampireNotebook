@@ -1,14 +1,13 @@
 
-
-use crate::GameState;
+use crate::state::GameState;
 use std::io::{self, Write};
 
-pub struct GameCore {
-    pub state: GameState,
+pub struct GameCore<'a> {
+    pub state: &'a (dyn GameState + 'a),
 }
 
-impl GameCore {
-    pub fn new(state: GameState) -> GameCore {
+impl<'a> GameCore<'a> {
+    pub fn new(state: &'a dyn GameState) -> GameCore {
         GameCore { state }
     }
 
@@ -22,7 +21,7 @@ impl GameCore {
             print!(">");
             stdout.flush().unwrap();
             match stdin.read_line(&mut input) {
-                Ok(_) => self.process_input(&input),
+                Ok(_) => self.state.handle_loop(&input),
                 Err(e) => eprintln!("{}", e)
             }
         }
