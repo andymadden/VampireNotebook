@@ -1,30 +1,36 @@
 
-use crate::state::GameState;
+use crate::state::{GameState, Transition, title_screen_loop, main_menu_loop, game_play_loop, pause_menu_loop};
 
-pub struct GameCore<'a> {
-    pub state: &'a (dyn GameState + 'a),
+pub struct GameCore {
+    pub game_state: GameState,
+    pub transition: Transition,
 }
 
-impl<'a> GameCore<'a> {
-    pub fn new(state: &'a dyn GameState) -> GameCore {
-        GameCore { state }
+impl GameCore {
+    pub fn new(state: GameState) -> GameCore {
+        GameCore { game_state: state, transition: Transition::Continue }
     }
 
     pub fn run_game(&mut self) {
         loop {
-            self.state.game_loop();
+            match self.game_state {
+                GameState::TitleScreen => title_screen_loop(self),
+                GameState::MainMenu => main_menu_loop(self),
+                GameState::GamePlay => game_play_loop(self),
+                GameState::PauseMenu => pause_menu_loop(self)
+            }
 
-            match self.state.get_next_state() {
-                Some(next_state) => {
-                    self.state = next_state;
+            match self.transition {
+                Transition::Next(game_state) => {
+                    self.game_state = game_state
                 },
-                None => ()
+                Transition::Continue => ()
             }
         }
     }
 
-    fn process_input(&self, input: &str) {
-        println!("Processed: {}", input);
+    pub fn set_state(&mut self, game_state: GameState) {
+        self.transition = Transition::Next(game_state);
     }
 }
 
