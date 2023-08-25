@@ -1,5 +1,8 @@
 
-use crate::state::{GameState, Transition, title_screen_loop, main_menu_loop, game_play_loop, pause_menu_loop};
+use super::state::{
+    GameState,
+    Transition,
+};
 
 pub struct GameCore {
     pub game_state: GameState,
@@ -13,16 +16,13 @@ impl GameCore {
 
     pub fn run_game(&mut self) {
         loop {
-            match self.game_state {
-                GameState::TitleScreen => title_screen_loop(self),
-                GameState::MainMenu => main_menu_loop(self),
-                GameState::GamePlay => game_play_loop(self),
-                GameState::PauseMenu => pause_menu_loop(self)
-            }
+            self.game_state.game_loop(self);
 
             match self.transition {
                 Transition::Next(game_state) => {
-                    self.game_state = game_state
+                    self.game_state.cleanup(self);
+                    self.game_state = game_state;
+                    self.game_state.init(self);
                 },
                 Transition::Continue => ()
             }
