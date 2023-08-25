@@ -16,6 +16,11 @@ pub enum GameState {
     PauseMenu
 }
 
+pub enum Transition {
+    Continue,
+    Next(GameState)
+}
+
 impl GameState { 
     pub fn init(self, core: &mut GameCore) {
         match self {
@@ -45,8 +50,4 @@ impl GameState {
     }
 }
 
-pub enum Transition {
-    Continue,
-    Next(GameState)
-}
 
