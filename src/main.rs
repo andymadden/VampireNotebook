@@ -3,6 +3,7 @@ extern crate pancurses;
 mod gamecore;
 mod state;
 mod services;
+mod util;
 
 use gamecore::GameCore;
 use pancurses::{initscr, noecho};

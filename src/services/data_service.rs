@@ -6,6 +6,10 @@ pub struct DataService {
 }
 
 impl DataService {
+    // TODO: Save/Load game info
+    // TODO: [?] Create modules for more in depth data service functionality
+    // TODO: [?] Export player stories as markdown, html, pdf, or word doc
+
     pub fn new() -> Self {
         let header_file_path = "./resources/header.txt";
         let mut header_file = match File::open(header_file_path) {

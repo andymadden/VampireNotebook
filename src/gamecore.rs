@@ -30,6 +30,7 @@ impl<'a> GameCore<'a> {
                     self.game_state.cleanup(self);
                     self.game_state = game_state;
                     self.game_state.init(self);
+                    self.state_transition = Transition::Continue;
                 },
                 Transition::Continue => ()
             }
