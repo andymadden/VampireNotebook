@@ -1,24 +1,31 @@
 
-use super::state::{
-    GameState,
-    Transition,
-};
+use pancurses::Window;
 
-pub struct GameCore {
+use crate::services::data_service::DataService;
+
+use super::state::{GameState, Transition};
+use super::services::curses_service::CursesService;
+
+pub struct GameCore<'a> {
     pub game_state: GameState,
-    pub transition: Transition,
+    pub state_transition: Transition,
+    pub curses_service: CursesService<'a>,
+    pub data_service: DataService,
 }
 
-impl GameCore {
-    pub fn new(state: GameState) -> GameCore {
-        GameCore { game_state: state, transition: Transition::Continue }
+impl<'a> GameCore<'a> {
+    pub fn new(state: GameState, window: &'a mut Window) -> GameCore {
+        GameCore {
+            game_state: state, state_transition: Transition::Continue,
+            curses_service: CursesService::new(window), data_service: DataService::new(),
+        }
     }
 
     pub fn run_game(&mut self) {
         loop {
             self.game_state.game_loop(self);
 
-            match self.transition {
+            match self.state_transition {
                 Transition::Next(game_state) => {
                     self.game_state.cleanup(self);
                     self.game_state = game_state;
@@ -30,7 +37,7 @@ impl GameCore {
     }
 
     pub fn set_state(&mut self, game_state: GameState) {
-        self.transition = Transition::Next(game_state);
+        self.state_transition = Transition::Next(game_state);
     }
 }
 
