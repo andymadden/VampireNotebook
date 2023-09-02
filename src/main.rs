@@ -9,6 +9,8 @@ use gamecore::GameCore;
 use pancurses::{initscr, noecho};
 use state::GameState;
 
+use services::Screen;
+
 fn main() {
     let mut window = initscr();
     noecho();

@@ -1,6 +1,5 @@
 mod game_play;
 mod main_menu;
-mod pause_menu;
 mod title_state;
 
 use super::GameCore;
@@ -13,7 +12,6 @@ pub enum GameState {
     TitleScreen,
     MainMenu,
     GamePlay,
-    PauseMenu,
 }
 
 pub enum Transition {
@@ -26,7 +24,6 @@ impl GameState {
         match self {
             GameState::GamePlay => game_play::game_play_init(core),
             GameState::MainMenu => main_menu::main_menu_init(core),
-            GameState::PauseMenu => pause_menu::pause_menu_init(core),
             GameState::TitleScreen => title_state::title_screen_init(core),
         }
     }
@@ -35,7 +32,6 @@ impl GameState {
         match self {
             GameState::GamePlay => game_play::game_play_loop(core),
             GameState::MainMenu => main_menu::main_menu_loop(core),
-            GameState::PauseMenu => pause_menu::pause_menu_loop(core),
             GameState::TitleScreen => title_state::title_screen_loop(core),
         }
     }
@@ -44,7 +40,6 @@ impl GameState {
         match self {
             GameState::GamePlay => game_play::game_play_cleanup(core),
             GameState::MainMenu => main_menu::main_menu_cleanup(core),
-            GameState::PauseMenu => pause_menu::pause_menu_cleanup(core),
             GameState::TitleScreen => title_state::title_screen_cleanup(core),
         }
     }
