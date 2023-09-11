@@ -3,6 +3,8 @@ use pancurses::Window;
 use crate::util::usize_to_i32;
 
 pub fn draw(window: &Window) {
+    window.border('|', '|', '-', '-', '+', '+', '+', '+');
+
     window.refresh();
     let (max_y, max_x) = window.get_max_yx();
 

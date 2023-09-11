@@ -3,6 +3,7 @@ use crate::util::usize_to_i32;
 use crate::services::data_service::DataService;
 
 pub fn draw(window: &Window, data_service: &DataService) {
+    window.border('|', '|', '-', '-', '+', '+', '+', '+');
 
     window.refresh();
     let rows = data_service.get_header().split("\n");

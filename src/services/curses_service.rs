@@ -1,10 +1,8 @@
-mod screen;
-
 use std::process::exit;
 
 use pancurses::{Window, Input, endwin, echo};
 
-pub use self::screen::Screen;
+pub use crate::screen::Screen;
 
 pub struct CursesService<'a> {
     window: &'a mut Window
@@ -26,10 +24,6 @@ impl<'a> CursesService<'a> {
 
     pub fn new(window: &'a mut Window) -> Self {
         CursesService { window }
-    }
-
-    pub fn draw_border(&self) -> () {
-        self.window.border('|', '|', '-', '-', '+', '+', '+', '+');
     }
 
     pub fn draw_screen(&self, screen: Screen) { // TODO: flesh this out to render a full main menu

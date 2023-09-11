@@ -1,15 +1,15 @@
 extern crate pancurses;
 
 mod gamecore;
-mod state;
+mod screen;
 mod services;
+mod state;
 mod util;
+mod widget;
 
 use gamecore::GameCore;
 use pancurses::{initscr, noecho};
 use state::GameState;
-
-use services::Screen;
 
 fn main() {
     let mut window = initscr();

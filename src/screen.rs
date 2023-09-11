@@ -1,6 +1,6 @@
 use pancurses::Window;
 
-use crate::services::data_service::{DataService, self};
+use crate::services::data_service::DataService;
 
 mod character_creation;
 mod main_menu;
